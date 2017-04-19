@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Werewolf Game</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container">
+  <div class="row">
+  	<div class="col-md-6 col-md-offset-3 text-center" style="margin-top: 100px">
+
+        <h2>The Werewolf Board Game!</h2>
+        <h3 id="room"></h3>
+        <h3 id="user"></h3>
+
+        <a class="btn btn-default" href="/role" role="button">Choose a role</a>
+        <a class="btn btn-default" href="/result" role="button">Submit result</a>
+        <a class="btn btn-default" href="/leaderboard" role="button">Leaderboard</a>
+
+    </div>
+  </div>
+</div>
+
+<script>
+    document.getElementById("room").innerHTML = "Room Number is: " + sessionStorage.getItem("room")
+    document.getElementById("user").innerHTML = "User Id is: " + sessionStorage.getItem("user_id")
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-97456747-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+</html>

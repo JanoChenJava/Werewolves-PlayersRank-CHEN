@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Werewolf Game</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container">
+  <div class="row">
+  	<div class="col-md-6 col-md-offset-3 text-center" style="margin-top: 100px">
+
+        <h2>Leaderboard</h2>
+        <h3 id="room"></h3>
+
+        <table class="table" id="player">
+            <thead>
+              <tr>
+                <th>User ID</th>
+                <th>Score</th>
+              </tr>
+            </thead>
+        </table>
+
+
+    </div>
+  </div>
+</div>
+
+<script>
+    document.getElementById("room").innerHTML = "Room Number is: " + sessionStorage.getItem("room")
+
+    getID = function(id){
+      return document.getElementById(id);
+    }
+
+    function add(userID, score) {
+        var playerCell = document.createElement("TD");
+        var playerCellText = document.createTextNode(userID);
+        playerCell.appendChild(playerCellText);
+
+        var scoreCell = document.createElement("TD");
+        var scoreCellText = document.createTextNode(score);
+        scoreCell.appendChild(scoreCellText);
+
+        var row = document.createElement("TR");
+        row.appendChild(playerCell);
+        row.appendChild(scoreCell);
+
+        getID("player").appendChild(row);
+    }
+
+    var xhttp = new XMLHttpRequest();
+        xhttp.open("GET", "https://werewolf-api.appspot.com/api/room/" + sessionStorage.getItem("room") + "/players", false);
+        xhttp.setRequestHeader("Content-type", "application/json");
+        xhttp.send();
+        var response = JSON.parse(xhttp.responseText);
+
+        if (response["result"] == "success") {
+            players = response["data"];
+            for (var i = 0; i < players.length; i++) {
+                add(players[i]["user_id"], players[i]["points"]);
+            }
+        }
+
+
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-97456747-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+</html>
